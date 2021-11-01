@@ -2,11 +2,12 @@
 #### Plethora Reads is an app that sells novels of any genre at a considerable price.
 
 ## Demo
-![App image](app/src/Assets/README/scr1.png)
-![App image](app/src/Assets/README/scr2.png)
-![App image](app/src/Assets/README/scr3.png)
-![App image](app/src/Assets/README/scr4.png)
-![App image](app/src/Assets/README/scr5.png)
+![App image](app/src/Assets/README/s1.png)
+![App image](app/src/Assets/README/s2.png)
+![App image](app/src/Assets/README/s3.png)
+![App image](app/src/Assets/README/s4.png)
+![App image](app/src/Assets/README/s5.png)
+![App image](app/src/Assets/README/s6.png)
 
 ## Contribution
 ### Getting debug info via logcat :mag:
