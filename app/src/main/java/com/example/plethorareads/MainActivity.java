@@ -17,11 +17,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    @BindView(R.id.searchNavigation)
-    RelativeLayout mSearchNavigation;
+    @BindView(R.id.searchNavigation) RelativeLayout mSearchNavigation;
     @BindView(R.id.loginNavigation) RelativeLayout mLoginNavigation;
-    @BindView(R.id.buttonSayCheese)
-    Button mSayCheeseButton;
+    @BindView(R.id.buttonSayCheese) Button mSayCheeseButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
