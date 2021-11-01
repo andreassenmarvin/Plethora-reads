@@ -14,24 +14,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PlethoraReads">
 
-        <activity android:name="LoginActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="SignupActivity"></activity>
-        <activity android:name="SearchActivity">
+
+        <activity android:name=".SignupActivity">
+
+        </activity>
+
+        <activity android:name=".SearchActivity"
+            android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
+
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
         </activity>
+
         <activity
             android:name=".MainActivity">
         </activity>

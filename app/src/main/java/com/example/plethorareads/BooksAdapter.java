@@ -25,13 +25,13 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.CustomViewHo
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
         VolumeInfo volumeInfo = this.volumeInfo.get(position).getVolumeInfo();
-        holder.bookTitle.setText(volumeInfo.getTitle());
-        holder.publisher.setText(volumeInfo.getPublisher());
+        holder.bookTitle.setText("Title: " + volumeInfo.getTitle());
+        holder.publisher.setText("Publisher: " + volumeInfo.getPublisher());
         if (volumeInfo.getAuthors() != null && !volumeInfo.getAuthors().isEmpty()) {
-            holder.bookAuthor.setText(volumeInfo.getAuthors().get(0));
+            holder.bookAuthor.setText("Author " + volumeInfo.getAuthors().get(0));
         }
-        holder.publishedDate.setText(volumeInfo.getPublishedDate());
-        holder.description.setText(volumeInfo.getDescription());
+        holder.publishedDate.setText("Published date: " + volumeInfo.getPublishedDate());
+        holder.description.setText("Description: " + volumeInfo.getDescription());
     }
 
     @Override
