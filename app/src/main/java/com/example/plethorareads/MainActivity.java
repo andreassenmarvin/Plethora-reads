@@ -1,100 +1,72 @@
 package com.example.plethorareads;
 
-import android.app.ProgressDialog;
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.widget.SearchView;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
+import com.google.firebase.auth.FirebaseAuth;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
-
-    private static final int MAX_RESULTS = 5;
-
-    private List<Item> volumeInfoList;
-    private ProgressDialog dialog;
-    private ApiService api;
-    private BooksAdapter adapter;
-    private RecyclerView recyclerView;
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.options_menu, menu);
-
-        // Associate searchable configuration with the SearchView
-        SearchManager searchManager =
-                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView =
-                (SearchView) menu.findItem(R.id.search).getActionView();
-        searchView.setSearchableInfo(
-                searchManager.getSearchableInfo(getComponentName()));
-
-        return true;
-    }
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+    @BindView(R.id.searchNavigation)
+    RelativeLayout mSearchNavigation;
+    @BindView(R.id.loginNavigation) RelativeLayout mLoginNavigation;
+    @BindView(R.id.buttonSayCheese)
+    Button mSayCheeseButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
-        api = RetroClient.getApiService();
-
-        dialog = new ProgressDialog(MainActivity.this);
-        dialog.setMessage("Loading...");
-
-        recyclerView = findViewById(R.id.recycler_view);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setHasFixedSize(true);
-        adapter = new BooksAdapter();
-        recyclerView.setAdapter(adapter);
+        mSearchNavigation.setOnClickListener(this);
+        mLoginNavigation.setOnClickListener(this);
+        mSayCheeseButton.setOnClickListener(this);
     }
 
     @Override
-    protected void onNewIntent(Intent intent) {
-        handleIntent(intent);
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_logout) {
+            logout();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
-    private void doSearch(final String query) {
-        dialog.show();
-
-            Call<BookResponse> call = api.getMyJSON(query, MAX_RESULTS);
-            call.enqueue(new Callback<BookResponse>() {
-                @Override
-                public void onResponse(Call<BookResponse> call, Response<BookResponse> response) {
-                    dialog.dismiss();
-
-                    if (response.isSuccessful()) {
-                        volumeInfoList = response.body().getItems();
-                        recyclerView.smoothScrollToPosition(0);
-                        adapter.setVolumeInfo(volumeInfoList);
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<BookResponse> call, Throwable t) {
-                    dialog.dismiss();
-                }
-            });
+    @Override
+    public void onClick(View v) {
+        if (v == mSearchNavigation) {
+            Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+            startActivity(intent);
         }
 
-        private void handleIntent(Intent intent) {
-            if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-                String query = intent.getStringExtra(SearchManager.QUERY);
-                doSearch(query);
-            }
+        if (v == mLoginNavigation) {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+        }
+
+        if (v == mSayCheeseButton) {
+            Intent intent = new Intent(MainActivity.this, Book1DetailActivity.class);
+            startActivity(intent);
         }
     }
+
+    private void logout() {
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+}
