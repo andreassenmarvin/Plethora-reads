@@ -1,9 +1,5 @@
 package com.example.plethorareads;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
@@ -12,6 +8,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.widget.SearchView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.options_menu, menu);
 
+        // Associate searchable configuration with the SearchView
         SearchManager searchManager =
                 (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView =
@@ -70,30 +71,30 @@ public class MainActivity extends AppCompatActivity {
     private void doSearch(final String query) {
         dialog.show();
 
-        Call<BookResponse> call = api.getMyJSON(query, MAX_RESULTS);
-        call.enqueue(new Callback<BookResponse>() {
-            @Override
-            public void onResponse(Call<BookResponse> call, Response<BookResponse> response) {
-                dialog.dismiss();
+            Call<BookResponse> call = api.getMyJSON(query, MAX_RESULTS);
+            call.enqueue(new Callback<BookResponse>() {
+                @Override
+                public void onResponse(Call<BookResponse> call, Response<BookResponse> response) {
+                    dialog.dismiss();
 
-                if (response.isSuccessful()) {
-                    volumeInfoList = response.body().getItems();
-                    recyclerView.smoothScrollToPosition(0);
-                    adapter.setVolumeInfo(volumeInfoList);
+                    if (response.isSuccessful()) {
+                        volumeInfoList = response.body().getItems();
+                        recyclerView.smoothScrollToPosition(0);
+                        adapter.setVolumeInfo(volumeInfoList);
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<BookResponse> call, Throwable t) {
-                dialog.dismiss();
-            }
-        });
-    }
+                @Override
+                public void onFailure(Call<BookResponse> call, Throwable t) {
+                    dialog.dismiss();
+                }
+            });
+        }
 
-    private void handleIntent(Intent intent) {
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String query = intent.getStringExtra(SearchManager.QUERY);
-            doSearch(query);
+        private void handleIntent(Intent intent) {
+            if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+                String query = intent.getStringExtra(SearchManager.QUERY);
+                doSearch(query);
+            }
         }
     }
-}
