@@ -1,5 +1,5 @@
 # PLETHORA READS
-#### Plethora Reads is an app that sells novels of any genre at a considerable price.
+#### Plethora Reads is an app developed by retrofit library that allows users to view novels of any genre using Google books Api.
 
 ## Demo
 ![App image](app/src/Assets/README/s1.png)
