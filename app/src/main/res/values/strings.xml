@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PlethoraReads</string>
+    <string name="search_hint">Input title or author</string>
 </resources>
