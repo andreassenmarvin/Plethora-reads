@@ -1,5 +1,6 @@
-package com.example.plethorareads;
+package network;
 
+import models.BookResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;

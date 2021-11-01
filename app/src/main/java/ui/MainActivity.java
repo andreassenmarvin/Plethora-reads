@@ -1,4 +1,4 @@
-package com.example.plethorareads;
+package ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.plethorareads.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 import butterknife.BindView;

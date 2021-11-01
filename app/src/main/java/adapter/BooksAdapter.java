@@ -1,4 +1,4 @@
-package com.example.plethorareads;
+package adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +7,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import models.Item;
+import com.example.plethorareads.R;
+import models.VolumeInfo;
 
 import java.util.List;
 

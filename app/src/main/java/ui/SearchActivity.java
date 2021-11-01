@@ -1,4 +1,4 @@
-package com.example.plethorareads;
+package ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,8 +13,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.widget.SearchView;
 
+import com.example.plethorareads.R;
+
 import java.util.List;
 
+import adapter.BooksAdapter;
+import models.BookResponse;
+import models.Item;
+import network.ApiService;
+import network.RetroClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
