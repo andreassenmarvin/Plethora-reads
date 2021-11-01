@@ -16,7 +16,7 @@
         android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
         android:layout_marginTop="5dp"
-        android:padding="15dp"
+        android:padding="10dp"
         android:text="Get yourself the most intriguing novels at a much considerable price."
         android:textSize="18sp"
         android:textColor="@color/white"
@@ -114,7 +114,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_marginTop="58dp"
         android:background="@color/white"
         android:padding="5dp">
 

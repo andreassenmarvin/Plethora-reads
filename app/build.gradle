@@ -1,12 +1,13 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.gms.google-services'
 }
 
 android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.example.plethora_reads"
+        applicationId "com.example.plethorareads"
         minSdk 21
         targetSdk 29
         versionCode 1
