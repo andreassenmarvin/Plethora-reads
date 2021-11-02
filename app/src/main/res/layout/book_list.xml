@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:orientation="vertical"
     android:padding="6dp"
     android:layout_margin="4dp">
+
+    <ImageView
+        android:id="@+id/cameraImageView"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:src="@drawable/darkplaces"
+        android:layout_above="@+id/bookTitle"/>
 
     <TextView
         android:id="@+id/bookTitle"
@@ -20,6 +27,7 @@
         android:id="@+id/bookAuthor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/bookTitle"
         android:padding="8dp"
         android:text="Author"
         android:textColor="@color/black"
@@ -29,6 +37,7 @@
         android:id="@+id/publisher"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/bookAuthor"
         android:padding="8dp"
         android:text="Publisher"
         android:textColor="@color/black"
@@ -38,6 +47,7 @@
         android:id="@+id/publishedDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/publisher"
         android:padding="8dp"
         android:text="Published Date"
         android:textColor="@color/black"
@@ -47,8 +57,9 @@
         android:id="@+id/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/publishedDate"
         android:padding="8dp"
         android:text="Description" />
 
 
-</LinearLayout>
+</RelativeLayout>
