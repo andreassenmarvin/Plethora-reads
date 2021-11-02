@@ -27,7 +27,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -90,19 +93,37 @@ public class SearchActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_photo:
-                onLaunchCamera();
+                onCameraIconClicked();
             default:
                 break;
         }
         return false;
     }
 
-    public void onLaunchCamera() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(this.getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+
+    public void onCameraIconClicked(){
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            onLaunchCamera();
+        } else {
+            // let's request permission.getContext(),getContext(),
+            String[] permissionRequest = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+            requestPermissions(permissionRequest, CAMERA_PERMISSION_REQUEST_CODE);
         }
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {
+            // we have heard back from our request for camera and write external storage.
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                onLaunchCamera();
+            } else {
+                Toast.makeText(this, getString(R.string.cannotOpenCamera), Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
